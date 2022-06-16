@@ -10,10 +10,14 @@ info analysisExample
   hepdata " http://adress.org "
   doi "10.1007/JHEP11(2017)029"
 
+object goodMuon : MUO
+  select Pt(MUO) > 50
+  
 region   testMu
   select      ALL              # to count all events
-  select      Size (MUO) >= 2  # events with 2 or more electrons 
-  histo       h1mReco, "muon mass (GeV)", 100, 0, 200, {MUO_0 MUO_1}m
-  select      {MUO[0] MUO[1]}q == 0   # Z is neutral
-  histo       h2mReco, "muon mass (GeV)", 100, 0, 200, {MUO_0 MUO_1}m
+  select      Size(MUO) >= 0  # events with 1 or more muons
+  select      Size(goodMuon) > 0
+  histo       h1mReco, "muon pt (GeV)", 100, 0, 200, pt(goodMuon) #}pt
+#  select      {MUO[0] MUO[1]}q == 0   # Z is neutral
+#  histo       hmReco, "muon mass (GeV)", 100, 0, 200, {MUO_0}m
 
