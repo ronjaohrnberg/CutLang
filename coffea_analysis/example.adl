@@ -1,0 +1,19 @@
+#CLA ADL example1
+info analysisExample
+  title "Search for electroweak production of charginos and neutralinos in WH events in proton-proton collisions at sqrt(s) = 13TeV"
+  experiment CMS
+  id "SUS-16-043"
+  publication "JHEP 11 (2017) 029"
+  sqrtS 13.0
+  lumi 35.9
+  arXiv "1706.09933"
+  hepdata " http://adress.org "
+  doi "10.1007/JHEP11(2017)029"
+
+region   testMu
+  select      ALL              # to count all events
+  select      Size (MUO) >= 2  # events with 2 or more electrons 
+  histo       h1mReco, "muon mass (GeV)", 100, 0, 200, {MUO_0 MUO_1}m
+  select      {MUO[0] MUO[1]}q == 0   # Z is neutral
+  histo       h2mReco, "muon mass (GeV)", 100, 0, 200, {MUO_0 MUO_1}m
+
